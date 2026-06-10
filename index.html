@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,210 +6,185 @@
     <title>صدى الطفولة | سيف النار</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #00d2ff; --secondary: #3a7bd5; --bg: #0b0f19;
-            --card: #161e2e; --text: #ffffff; --accent: #ff9800;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        header {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 40px 0;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            font-weight: 900;
-        }
-
-        .main-container {
-            max-width: 900px;
-            width: 95%;
-            margin: 30px auto;
-        }
-
-        .video-wrapper {
-            background: #000;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 3px solid var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
-            margin-bottom: 30px;
-            display: none;
-            position: relative;
-        }
-
-        .responsive-iframe {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .responsive-iframe iframe {
-            position: absolute;
-            top: -155px;
-            left: 0;
-            width: 100%;
-            height: calc(100% + 155px);
-            border: 0;
-        }
-
-        .video-footer {
-            padding: 15px;
-            background: var(--card);
-            text-align: center;
-            font-weight: bold;
-            color: var(--primary);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .episodes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-            gap: 12px;
-        }
-
-        .ep-btn {
-            background: #252f44;
-            color: white;
-            padding: 15px 0;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .ep-btn:hover {
-            background: var(--primary);
-            color: #000;
-        }
-
-        .ep-btn.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-        }
-
-        footer {
-            margin: 40px 0;
-            opacity: 0.5;
-            font-size: 0.8rem;
-        }
+        :root { --primary: #00d2ff; --accent: #ff9800; --bg: #0b0f19; --card: #161e2e; }
+        * { user-select: none; }
+        body { background-color: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; position: relative; }
+        header { width: 100%; background: linear-gradient(135deg, #00d2ff, #3a7bd5); padding: 40px 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .banner-top, .banner-bottom { width: 100%; text-align: center; background: #0a0e15; padding: 20px 0; margin: 0 auto; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow-x: auto; }
+        .banner-top { max-width: 900px; margin-top: 20px; margin-bottom: 10px; }
+        .banner-bottom { max-width: 900px; margin-top: 30px; margin-bottom: 20px; }
+        .main-container { max-width: 900px; width: 95%; margin: 0 auto; text-align: center; }
+        .video-wrapper-outer { position: relative; z-index: 1; }
+        .video-display-area { background: #000; border-radius: 20px; overflow: hidden; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); margin-bottom: 30px; display: none; position: relative; }
+        .responsive-iframe { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+        .responsive-iframe iframe { position: absolute; top: -160px; left: 0; width: 100%; height: calc(100% + 160px); border: 0; overflow: hidden; pointer-events: auto; }
+        .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; background: var(--card); padding: 25px; border-radius: 20px; max-height: 600px; overflow-y: auto; }
+        .ep-btn { background: #252f44; color: white; border: 2px solid transparent; padding: 15px 0; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .ep-btn:hover { background: var(--primary); transform: scale(1.1); border-color: white; }
+        .ep-btn.active { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
+        .info-text { margin-top: 20px; color: var(--primary); }
+        footer { margin-top: 50px; padding: 20px; opacity: 0.4; text-align: center; }
+        @media (max-width: 600px) { .episodes-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; padding: 15px; } .ep-btn { padding: 10px 0; font-size: 1rem; } }
     </style>
 </head>
 <body>
-
-<!-- البنر العلوي -->
-<div style="width:100%; text-align:center; margin:15px 0;">
+<header><h1>🎬 صدى الطفولة</h1><p>اختر رقم الحلقة وابدأ المشاهدة فوراً (108 حلقة)</p></header>
+<div class="banner-top"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
+<div class="main-container"><div class="video-wrapper-outer"><div id="videoPlayer" class="video-display-area"><div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen scrolling="no"></iframe></div><div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div></div></div><h2>اضغط على رقم الحلقة للمشاهدة:</h2><div class="episodes-grid" id="buttonsGrid"></div><p class="info-text">جميع حلقات سيف النار (108 حلقة) متوفرة الآن بجودة عالية</p></div>
+<div class="banner-bottom"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
+<footer>جميع الحقوق محفوظة - صدى الطفولة &copy; 2026</footer>
 <script>
-  atOptions = {
-    'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
-</div>
+    const adLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
+    // قائمة الروابط الصحيحة المستخرجة من صفحة كرتوني
+    const episodeLinks = [
+        "https://cartoony.net/watch/215/1843", // 1
+        "https://cartoony.net/watch/215/1844", // 2
+        "https://cartoony.net/watch/215/1845", // 3
+        "https://cartoony.net/watch/215/1846", // 4
+        "https://cartoony.net/watch/215/1847", // 5
+        "https://cartoony.net/watch/215/1848", // 6
+        "https://cartoony.net/watch/215/1849", // 7
+        "https://cartoony.net/watch/215/1850", // 8
+        "https://cartoony.net/watch/215/1851", // 9
+        "https://cartoony.net/watch/215/1852", // 10
+        "https://cartoony.net/watch/215/1853", // 11
+        "https://cartoony.net/watch/215/1854", // 12
+        "https://cartoony.net/watch/215/1855", // 13
+        "https://cartoony.net/watch/215/1856", // 14
+        "https://cartoony.net/watch/215/1857", // 15
+        "https://cartoony.net/watch/215/1858", // 16
+        "https://cartoony.net/watch/215/1859", // 17
+        "https://cartoony.net/watch/215/1860", // 18
+        "https://cartoony.net/watch/215/1861", // 19
+        "https://cartoony.net/watch/215/1862", // 20
+        "https://cartoony.net/watch/215/1863", // 21
+        "https://cartoony.net/watch/215/1864", // 22
+        "https://cartoony.net/watch/215/1865", // 23
+        "https://cartoony.net/watch/215/1866", // 24
+        "https://cartoony.net/watch/215/1867", // 25
+        "https://cartoony.net/watch/215/1868", // 26
+        "https://cartoony.net/watch/215/1869", // 27
+        "https://cartoony.net/watch/215/1870", // 28
+        "https://cartoony.net/watch/215/1871", // 29
+        "https://cartoony.net/watch/215/1872", // 30
+        "https://cartoony.net/watch/215/1873", // 31
+        "https://cartoony.net/watch/215/1874", // 32
+        "https://cartoony.net/watch/215/1875", // 33
+        "https://cartoony.net/watch/215/1876", // 34
+        "https://cartoony.net/watch/215/1877", // 35
+        "https://cartoony.net/watch/215/1878", // 36
+        "https://cartoony.net/watch/215/1879", // 37
+        "https://cartoony.net/watch/215/1880", // 38
+        "https://cartoony.net/watch/215/1881", // 39
+        "https://cartoony.net/watch/215/1882", // 40
+        "https://cartoony.net/watch/215/1883", // 41
+        "https://cartoony.net/watch/215/1884", // 42
+        "https://cartoony.net/watch/215/1885", // 43
+        "https://cartoony.net/watch/215/1886", // 44
+        "https://cartoony.net/watch/215/1887", // 45
+        "https://cartoony.net/watch/215/1888", // 46
+        "https://cartoony.net/watch/215/1889", // 47
+        "https://cartoony.net/watch/215/1890", // 48
+        "https://cartoony.net/watch/215/1891", // 49
+        "https://cartoony.net/watch/215/1892", // 50
+        "https://cartoony.net/watch/215/1893", // 51
+        "https://cartoony.net/watch/215/1894", // 52
+        "https://cartoony.net/watch/215/1895", // 53
+        "https://cartoony.net/watch/215/1896", // 54
+        "https://cartoony.net/watch/215/1897", // 55
+        "https://cartoony.net/watch/215/1898", // 56
+        "https://cartoony.net/watch/215/1899", // 57
+        "https://cartoony.net/watch/215/1900", // 58
+        "https://cartoony.net/watch/215/1901", // 59
+        "https://cartoony.net/watch/215/1902", // 60
+        "https://cartoony.net/watch/215/1903", // 61
+        "https://cartoony.net/watch/215/1904", // 62
+        "https://cartoony.net/watch/215/1905", // 63
+        "https://cartoony.net/watch/215/1906", // 64
+        "https://cartoony.net/watch/215/1907", // 65
+        "https://cartoony.net/watch/215/1908", // 66
+        "https://cartoony.net/watch/215/1909", // 67
+        "https://cartoony.net/watch/215/1910", // 68
+        "https://cartoony.net/watch/215/1911", // 69
+        "https://cartoony.net/watch/215/1912", // 70
+        "https://cartoony.net/watch/215/1913", // 71
+        "https://cartoony.net/watch/215/1914", // 72
+        "https://cartoony.net/watch/215/1915", // 73
+        "https://cartoony.net/watch/215/1916", // 74
+        "https://cartoony.net/watch/215/1917", // 75
+        "https://cartoony.net/watch/215/1918", // 76
+        "https://cartoony.net/watch/215/1919", // 77
+        "https://cartoony.net/watch/215/1920", // 78
+        "https://cartoony.net/watch/215/1921", // 79
+        "https://cartoony.net/watch/215/1922", // 80
+        "https://cartoony.net/watch/215/1923", // 81
+        "https://cartoony.net/watch/215/1924", // 82
+        "https://cartoony.net/watch/215/1925", // 83
+        "https://cartoony.net/watch/215/1926", // 84
+        "https://cartoony.net/watch/215/1927", // 85
+        "https://cartoony.net/watch/215/1928", // 86
+        "https://cartoony.net/watch/215/1929", // 87
+        "https://cartoony.net/watch/215/1930", // 88
+        "https://cartoony.net/watch/215/1931", // 89
+        "https://cartoony.net/watch/215/1932", // 90
+        "https://cartoony.net/watch/215/1933", // 91
+        "https://cartoony.net/watch/215/1934", // 92
+        "https://cartoony.net/watch/215/1935", // 93
+        "https://cartoony.net/watch/215/1936", // 94
+        "https://cartoony.net/watch/215/1937", // 95
+        "https://cartoony.net/watch/215/1938", // 96
+        "https://cartoony.net/watch/215/1939", // 97
+        "https://cartoony.net/watch/215/1940", // 98
+        "https://cartoony.net/watch/215/1941", // 99
+        "https://cartoony.net/watch/215/1942", // 100
+        "https://cartoony.net/watch/215/1943", // 101
+        "https://cartoony.net/watch/215/1944", // 102
+        "https://cartoony.net/watch/215/1945", // 103
+        "https://cartoony.net/watch/215/1946", // 104
+        "https://cartoony.net/watch/215/1947", // 105
+        "https://cartoony.net/watch/215/1948", // 106
+        "https://cartoony.net/watch/215/1949", // 107
+        "https://cartoony.net/watch/215/5605"  // 108
+    ];
 
-<header>
-    <h1>🎬 صدى الطفولة</h1>
-    <p>سيف النار - كامل 108 حلقة</p>
-</header>
-
-<div class="main-container">
-    <div id="videoContainer" class="video-wrapper">
-        <div class="responsive-iframe">
-            <iframe id="mainIframe" src="" frameborder="0" allowfullscreen="true" scrolling="no"></iframe>
-        </div>
-        <div id="epTitle" class="video-footer">
-            أنت تشاهد الآن: حلقة <span id="epNumText"></span>
-        </div>
-    </div>
-
-    <div class="episodes-container" style="background: var(--card); padding: 25px; border-radius: 20px;">
-        <div class="episodes-grid" id="buttonsGrid"></div>
-    </div>
-</div>
-
-<footer>
-    <p>جميع الحقوق محفوظة لـ صدى الطفولة &copy; 2026</p>
-</footer>
-
-<!-- البنر السفلي -->
-<div style="width:100%; text-align:center; margin:15px 0;">
-<script>
-  atOptions = {
-    'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
-</div>
-
-<script>
-    const grid = document.getElementById('buttonsGrid');
-    const container = document.getElementById('videoContainer');
-    const iframe = document.getElementById('mainIframe');
-    const epNumDisplay = document.getElementById('epNumText');
-    const totalEpisodes = 108;
-
-    for (let i = 1; i <= totalEpisodes; i++) {
-        const btn = document.createElement('button');
-        btn.className = 'ep-btn';
-        btn.innerText = i;
-
-        let episodeId;
-
-        if (i <= 54) {
-            episodeId = 1843 + (i - 1);
-        } else if (i < 100) {
-            episodeId = 5597 - (100 - i);
-        } else if (i === 100) {
-            episodeId = 5597;
-        } else {
-            episodeId = 5597 + (i - 100);
-        }
-
-        const link = `https://cartoony.net/watch/215/${episodeId}`;
-
-        btn.onclick = function() {
-
-            container.style.display = 'block';
-            iframe.src = link;
-            epNumDisplay.innerText = i;
-
-            document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        };
-
-        grid.appendChild(btn);
+    const grid = document.getElementById('buttonsGrid'); 
+    const player = document.getElementById('videoPlayer'); 
+    const iframe = document.getElementById('mainIframe'); 
+    const titleDisp = document.getElementById('episodeTitle');
+    let scrollPosition = 0;
+    
+    function lockPage() { 
+        scrollPosition = window.scrollY; 
+        document.body.style.position = 'fixed'; 
+        document.body.style.top = `-${scrollPosition}px`; 
+        document.body.style.width = '100%'; 
+    }
+    
+    function unlockPage() { 
+        document.body.style.position = ''; 
+        document.body.style.top = ''; 
+        document.body.style.width = ''; 
+        window.scrollTo(0, scrollPosition); 
+    }
+    
+    for(let i = 0; i < episodeLinks.length; i++) { 
+        const btn = document.createElement('button'); 
+        btn.className = 'ep-btn'; 
+        btn.innerText = i + 1; 
+        const link = episodeLinks[i];
+        const idx = i;
+        btn.onclick = function() { 
+            window.open(adLink, '_blank'); 
+            lockPage(); 
+            player.style.display = 'block'; 
+            iframe.src = link; 
+            titleDisp.innerText = "أنت تشاهد الآن: سيف النار - الحلقة " + (idx + 1); 
+            document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active')); 
+            this.classList.add('active'); 
+            setTimeout(() => { unlockPage(); }, 500); 
+        }; 
+        grid.appendChild(btn); 
     }
 </script>
-
 </body>
 </html>
-```
