@@ -3,188 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صدى الطفولة | سيف النار</title>
+    <title>صدى الطفولة | حكايات عالمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00d2ff; --accent: #ff9800; --bg: #0b0f19; --card: #161e2e; }
-        * { user-select: none; }
+        * { user-select: none; box-sizing: border-box; }
         body { background-color: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; position: relative; }
-        header { width: 100%; background: linear-gradient(135deg, #00d2ff, #3a7bd5); padding: 40px 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        header { width: 100%; background: linear-gradient(135deg, #00d2ff, #3a7bd5); padding: 30px 0; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        
         .banner-top, .banner-bottom { width: 100%; text-align: center; background: #0a0e15; padding: 20px 0; margin: 0 auto; display: flex; justify-content: center; align-items: center; border-radius: 12px; overflow-x: auto; }
         .banner-top { max-width: 900px; margin-top: 20px; margin-bottom: 10px; }
         .banner-bottom { max-width: 900px; margin-top: 30px; margin-bottom: 20px; }
+        
         .main-container { max-width: 900px; width: 95%; margin: 0 auto; text-align: center; }
+        
+        .back-home-btn { background: #252f44; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-weight: bold; cursor: pointer; margin: 20px 0; transition: 0.3s; display: inline-flex; align-items: center; gap: 5px; text-decoration: none; }
+        .back-home-btn:hover { background: var(--primary); color: #000; }
+
         .video-wrapper-outer { position: relative; z-index: 1; }
         .video-display-area { background: #000; border-radius: 20px; overflow: hidden; border: 3px solid var(--primary); box-shadow: 0 0 30px rgba(0, 210, 255, 0.2); margin-bottom: 30px; display: none; position: relative; }
         .responsive-iframe { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
-        .responsive-iframe iframe { position: absolute; top: -160px; left: 0; width: 100%; height: calc(100% + 160px); border: 0; overflow: hidden; pointer-events: auto; }
-        .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; background: var(--card); padding: 25px; border-radius: 20px; max-height: 600px; overflow-y: auto; }
-        .ep-btn { background: #252f44; color: white; border: 2px solid transparent; padding: 15px 0; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .ep-btn:hover { background: var(--primary); transform: scale(1.1); border-color: white; }
+        .responsive-iframe iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; overflow: hidden; pointer-events: auto; }
+        
+        .episodes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 15px; background: var(--card); padding: 25px; border-radius: 20px; }
+        .ep-btn { background: #252f44; color: white; border: 2px solid transparent; padding: 15px 0; border-radius: 12px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; font-family: 'Cairo', sans-serif; }
+        .ep-btn:hover { background: var(--primary); transform: scale(1.1); border-color: white; color: #000; }
         .ep-btn.active { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
+        
+        /* تنسيق زر شارة البداية الخاص في النهاية */
+        .intro-btn { grid-column: span 2; font-size: 1rem !important; background: #3a7bd5 !important; }
+
         .info-text { margin-top: 20px; color: var(--primary); }
         footer { margin-top: 50px; padding: 20px; opacity: 0.4; text-align: center; }
-        @media (max-width: 600px) { .episodes-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; padding: 15px; } .ep-btn { padding: 10px 0; font-size: 1rem; } }
+        @media (max-width: 600px) { .episodes-grid { grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 10px; padding: 15px; } .ep-btn { padding: 12px 0; font-size: 1.1rem; } .intro-btn { grid-column: span 3; } }
     </style>
 </head>
 <body>
-<header><h1>🎬 صدى الطفولة</h1><p>اختر رقم الحلقة وابدأ المشاهدة فوراً (108 حلقة)</p></header>
-<div class="banner-top"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
-<div class="main-container"><div class="video-wrapper-outer"><div id="videoPlayer" class="video-display-area"><div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen scrolling="no"></iframe></div><div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div></div></div><h2>اضغط على رقم الحلقة للمشاهدة:</h2><div class="episodes-grid" id="buttonsGrid"></div><p class="info-text">جميع حلقات سيف النار (108 حلقة) متوفرة الآن بجودة عالية</p></div>
-<div class="banner-bottom"><script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script><script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script></div>
+
+<header>
+    <h1>🎬 مسلسل حكايات عالمية</h1>
+    <p>اختر رقم الحلقة وابدأ المشاهدة فوراً</p>
+</header>
+
+<!-- إعلان البنر العلوي -->
+<div class="banner-top">
+    <script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script>
+    <script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
+</div>
+
+<div class="main-container">
+    <a href="https://husamalu637.github.io/Sasuke/" class="back-home-btn">⬅ العودة إلى الرئيسية</a>
+
+    <div class="video-wrapper-outer">
+        <div id="videoPlayer" class="video-display-area">
+            <div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen allow="autoplay; encrypted-media" scrolling="no"></iframe></div>
+            <div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <h2>اضغط على رقم الحلقة للمشاهدة:</h2>
+    <div class="episodes-grid" id="buttonsGrid"></div>
+    <p class="info-text">جميع حلقات حكايات عالمية متوفرة وتعمل بكفاءة عالية</p>
+</div>
+
+<!-- إعلان البنر السفلي -->
+<div class="banner-bottom">
+    <script> atOptions = { 'key' : 'b8ba5b25ff25e41ea44c2df3a1b05378', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} }; </script>
+    <script src="https://www.highperformanceformat.com/b8ba5b25ff25e41ea44c2df3a1b05378/invoke.js"></script>
+</div>
+
 <footer>جميع الحقوق محفوظة - صدى الطفولة &copy; 2026</footer>
+
 <script>
-    const adLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
-    // قائمة الروابط الصحيحة المستخرجة من صفحة كرتوني
-    const episodeLinks = [
-        "https://cartoony.net/watch/215/1843", // 1
-        "https://cartoony.net/watch/215/1844", // 2
-        "https://cartoony.net/watch/215/1845", // 3
-        "https://cartoony.net/watch/215/1846", // 4
-        "https://cartoony.net/watch/215/1847", // 5
-        "https://cartoony.net/watch/215/1848", // 6
-        "https://cartoony.net/watch/215/1849", // 7
-        "https://cartoony.net/watch/215/1850", // 8
-        "https://cartoony.net/watch/215/1851", // 9
-        "https://cartoony.net/watch/215/1852", // 10
-        "https://cartoony.net/watch/215/1853", // 11
-        "https://cartoony.net/watch/215/1854", // 12
-        "https://cartoony.net/watch/215/1855", // 13
-        "https://cartoony.net/watch/215/1856", // 14
-        "https://cartoony.net/watch/215/1857", // 15
-        "https://cartoony.net/watch/215/1858", // 16
-        "https://cartoony.net/watch/215/1859", // 17
-        "https://cartoony.net/watch/215/1860", // 18
-        "https://cartoony.net/watch/215/1861", // 19
-        "https://cartoony.net/watch/215/1862", // 20
-        "https://cartoony.net/watch/215/1863", // 21
-        "https://cartoony.net/watch/215/1864", // 22
-        "https://cartoony.net/watch/215/1865", // 23
-        "https://cartoony.net/watch/215/1866", // 24
-        "https://cartoony.net/watch/215/1867", // 25
-        "https://cartoony.net/watch/215/1868", // 26
-        "https://cartoony.net/watch/215/1869", // 27
-        "https://cartoony.net/watch/215/1870", // 28
-        "https://cartoony.net/watch/215/1871", // 29
-        "https://cartoony.net/watch/215/1872", // 30
-        "https://cartoony.net/watch/215/1873", // 31
-        "https://cartoony.net/watch/215/1874", // 32
-        "https://cartoony.net/watch/215/1875", // 33
-        "https://cartoony.net/watch/215/1876", // 34
-        "https://cartoony.net/watch/215/1877", // 35
-        "https://cartoony.net/watch/215/1878", // 36
-        "https://cartoony.net/watch/215/1879", // 37
-        "https://cartoony.net/watch/215/1880", // 38
-        "https://cartoony.net/watch/215/1881", // 39
-        "https://cartoony.net/watch/215/1882", // 40
-        "https://cartoony.net/watch/215/1883", // 41
-        "https://cartoony.net/watch/215/1884", // 42
-        "https://cartoony.net/watch/215/1885", // 43
-        "https://cartoony.net/watch/215/1886", // 44
-        "https://cartoony.net/watch/215/1887", // 45
-        "https://cartoony.net/watch/215/1888", // 46
-        "https://cartoony.net/watch/215/1889", // 47
-        "https://cartoony.net/watch/215/1890", // 48
-        "https://cartoony.net/watch/215/1891", // 49
-        "https://cartoony.net/watch/215/1892", // 50
-        "https://cartoony.net/watch/215/1893", // 51
-        "https://cartoony.net/watch/215/1894", // 52
-        "https://cartoony.net/watch/215/1895", // 53
-        "https://cartoony.net/watch/215/1896", // 54
-        "https://cartoony.net/watch/215/1897", // 55
-        "https://cartoony.net/watch/215/1898", // 56
-        "https://cartoony.net/watch/215/1899", // 57
-        "https://cartoony.net/watch/215/1900", // 58
-        "https://cartoony.net/watch/215/1901", // 59
-        "https://cartoony.net/watch/215/1902", // 60
-        "https://cartoony.net/watch/215/1903", // 61
-        "https://cartoony.net/watch/215/1904", // 62
-        "https://cartoony.net/watch/215/1905", // 63
-        "https://cartoony.net/watch/215/1906", // 64
-        "https://cartoony.net/watch/215/1907", // 65
-        "https://cartoony.net/watch/215/1908", // 66
-        "https://cartoony.net/watch/215/1909", // 67
-        "https://cartoony.net/watch/215/1910", // 68
-        "https://cartoony.net/watch/215/1911", // 69
-        "https://cartoony.net/watch/215/1912", // 70
-        "https://cartoony.net/watch/215/1913", // 71
-        "https://cartoony.net/watch/215/1914", // 72
-        "https://cartoony.net/watch/215/1915", // 73
-        "https://cartoony.net/watch/215/1916", // 74
-        "https://cartoony.net/watch/215/1917", // 75
-        "https://cartoony.net/watch/215/1918", // 76
-        "https://cartoony.net/watch/215/1919", // 77
-        "https://cartoony.net/watch/215/1920", // 78
-        "https://cartoony.net/watch/215/1921", // 79
-        "https://cartoony.net/watch/215/1922", // 80
-        "https://cartoony.net/watch/215/1923", // 81
-        "https://cartoony.net/watch/215/1924", // 82
-        "https://cartoony.net/watch/215/1925", // 83
-        "https://cartoony.net/watch/215/1926", // 84
-        "https://cartoony.net/watch/215/1927", // 85
-        "https://cartoony.net/watch/215/1928", // 86
-        "https://cartoony.net/watch/215/1929", // 87
-        "https://cartoony.net/watch/215/1930", // 88
-        "https://cartoony.net/watch/215/1931", // 89
-        "https://cartoony.net/watch/215/1932", // 90
-        "https://cartoony.net/watch/215/1933", // 91
-        "https://cartoony.net/watch/215/1934", // 92
-        "https://cartoony.net/watch/215/1935", // 93
-        "https://cartoony.net/watch/215/1936", // 94
-        "https://cartoony.net/watch/215/1937", // 95
-        "https://cartoony.net/watch/215/1938", // 96
-        "https://cartoony.net/watch/215/1939", // 97
-        "https://cartoony.net/watch/215/1940", // 98
-        "https://cartoony.net/watch/215/1941", // 99
-        "https://cartoony.net/watch/215/1942", // 100
-        "https://cartoony.net/watch/215/1943", // 101
-        "https://cartoony.net/watch/215/1944", // 102
-        "https://cartoony.net/watch/215/1945", // 103
-        "https://cartoony.net/watch/215/1946", // 104
-        "https://cartoony.net/watch/215/1947", // 105
-        "https://cartoony.net/watch/215/1948", // 106
-        "https://cartoony.net/watch/215/1949", // 107
-        "https://cartoony.net/watch/215/5605"  // 108
+    const popupAdLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
+
+    // مصفوفة الحلقات تبدأ من الحلقة 1 (علاء الدين) وتنتهي بشارة البداية في الأخير
+    const episodesData = [
+        { title: "الحلقة 1 - علاء الدين والمصباح السحري", url: "https://www.youtube.com/embed/Esv--UvlI1I", type: "ep", num: 1 },
+        { title: "الحلقة 2 - الراعي البسيط", url: "https://www.youtube.com/embed/_V6hoHmnFhs", type: "ep", num: 2 },
+        { title: "الحلقة 3 - الأمنيات الثلاث", url: "https://www.youtube.com/embed/8QZY2moKibs", type: "ep", num: 3 },
+        { title: "الحلقة 4 - الحاكم وابنة المزارع", url: "https://www.youtube.com/embed/Nx-_JFudk-4", type: "ep", num: 4 },
+        { title: "الحلقة 5 - الثعبان والثرثارة", url: "https://www.youtube.com/embed/qrrvpWmRwX0", type: "ep", num: 5 },
+        { title: "الحلقة 6 - الدببة الثلاثة", url: "https://www.youtube.com/embed/nw-ziOR101Q", type: "ep", num: 6 },
+        { title: "الحلقة 7 - ملك الغابة", url: "https://www.youtube.com/embed/cdk2Fy6GJBM", type: "ep", num: 7 },
+        { title: "الحلقة 8 - الآذان الطويلة", url: "https://www.youtube.com/embed/Xh_4-xkaJDI", type: "ep", num: 8 },
+        { title: "الحلقة 9 - بائع التفاح", url: "https://www.youtube.com/embed/uRdG6z4MWQc", type: "ep", num: 9 },
+        { title: "الحلقة 10 - الحاكم الذي أصبح لقلقاً", url: "https://www.youtube.com/embed/248cS3SvEnE", type: "ep", num: 10 },
+        { title: "الحلقة 11", url: "https://www.youtube.com/embed/oF9u8QvAJgI", type: "ep", num: 11 },
+        { title: "الحلقة 12", url: "https://www.youtube.com/embed/IKjqSigznis", type: "ep", num: 12 },
+        { title: "الحلقة 13 - اللص الشهير", url: "https://www.youtube.com/embed/4p3QM4cqTKU", type: "ep", num: 13 },
+        { title: "الحلقة 14", url: "https://www.youtube.com/embed/1WfQNV0CGwY", type: "ep", num: 14 },
+        { title: "الحلقة 15", url: "https://www.youtube.com/embed/9OJAtoioQGA", type: "ep", num: 15 },
+        { title: "الحلقة 16", url: "https://www.youtube.com/embed/BM9Bnr16k04", type: "ep", num: 16 },
+        { title: "الحلقة 17", url: "https://www.youtube.com/embed/plta2P3CpW0", type: "ep", num: 17 },
+        { title: "الحلقة 18 - مدينة الزمرد", url: "https://www.youtube.com/embed/Z23xl3yaODc", type: "ep", num: 18 },
+        { title: "الحلقة 19 - فأر الريف وفأر المدينة", url: "https://www.youtube.com/embed/5kdwj6bSiiU", type: "ep", num: 19 },
+        { title: "الحلقة 20", url: "https://www.youtube.com/embed/clAE_LDzYgY", type: "ep", num: 20 },
+        { title: "الحلقة 21 - ملابس الاحتفال", url: "https://www.youtube.com/embed/NOVbq514zCU", type: "ep", num: 21 },
+        { title: "الحلقة 22", url: "https://www.youtube.com/embed/Nz9tFzDtNDc", type: "ep", num: 22 },
+        { title: "الحلقة 23", url: "https://www.youtube.com/embed/TjlgL01yq7M", type: "ep", num: 23 },
+        { title: "الحلقة 24 - كيف حصل الأرنب على الزبدة", url: "https://www.youtube.com/embed/tLPKO22B1h8", type: "ep", num: 24 },
+        { title: "الحلقة 25", url: "https://www.youtube.com/embed/UPbaoe_9q6k", type: "ep", num: 25 },
+        { title: "الحلقة 26", url: "https://www.youtube.com/embed/L0jWz0mKbcE", type: "ep", num: 26 },
+        { title: "الحلقة 27", url: "https://www.youtube.com/embed/Hf7yCxonx0Q", type: "ep", num: 27 },
+        { title: "الحلقة 28 - القط ذو الحذاء", url: "https://www.youtube.com/embed/CZuafb1YlJ0", type: "ep", num: 28 },
+        { title: "الحلقة 29", url: "https://www.youtube.com/embed/NZZvt3ig89c", type: "ep", num: 29 },
+        { title: "الحلقة 30", url: "https://www.youtube.com/embed/WPw7qaMx0B0", type: "ep", num: 30 },
+        { title: "الحلقة 31", url: "https://www.youtube.com/embed/9aRiYk0ZXzw", type: "ep", num: 31 },
+        { title: "الحلقة 32 - روبن هود", url: "https://www.youtube.com/embed/hcDar9UIcPY", type: "ep", num: 32 },
+        { title: "الحلقة 33 - روميو وجوليت", url: "https://www.youtube.com/embed/xWAIB8flrls", type: "ep", num: 33 },
+        { title: "الحلقة 34", url: "https://www.youtube.com/embed/pSAheEv1iLw", type: "ep", num: 34 },
+        { title: "الحلقة 35 - عائلة المحبة", url: "https://www.youtube.com/embed/d-PndF1DJ74", type: "ep", num: 35 },
+        { title: "الحلقة 36", url: "https://www.youtube.com/embed/iP8fX5jTCwQ", type: "ep", num: 36 },
+        { title: "الحلقة 37", url: "https://www.youtube.com/embed/KW9q0A5N8Dk", type: "ep", num: 37 },
+        { title: "الحلقة 38 - لماذا تسير السلحفاة ببطء", url: "https://www.youtube.com/embed/WRVxjNyW-rA", type: "ep", num: 38 },
+        { title: "الحلقة 39", url: "https://www.youtube.com/embed/lJU3jJr_wrg", type: "ep", num: 39 },
+        { title: "الحلقة 40 - ملكة الثلج", url: "https://www.youtube.com/embed/MdJOJwxC1zY", type: "ep", num: 40 },
+        { title: "الحلقة 41", url: "https://www.youtube.com/embed/igbpU3cW7ys", type: "ep", num: 41 },
+        { title: "الحلقة 42", url: "https://www.youtube.com/embed/ZBHf8D1UJ7w", type: "ep", num: 42 },
+        { title: "الحلقة 43 - موسيقى المدينة", url: "https://www.youtube.com/embed/sKX3tCA4_Sw", type: "ep", num: 43 },
+        { title: "الحلقة 44", url: "https://www.youtube.com/embed/sXsTl7CsvL4", type: "ep", num: 44 },
+        { title: "الحلقة 45", url: "https://www.youtube.com/embed/h1RINN-6FQI", type: "ep", num: 45 },
+        { title: "الحلقة 46", url: "https://www.youtube.com/embed/34P1NGU32lQ", type: "ep", num: 46 },
+        { title: "الحلقة 47 - الأميرة النائمة", url: "https://www.youtube.com/embed/2VAM3zyxONQ", type: "ep", num: 47 },
+        { title: "الحلقة 48", url: "https://www.youtube.com/embed/EPS0FE8pFTE", type: "ep", num: 48 },
+        { title: "الحلقة 49", url: "https://www.youtube.com/embed/-VgN6htolS8", type: "ep", num: 49 },
+        { title: "الحلقة 50", url: "https://www.youtube.com/embed/Ax3euZ16CBY", type: "ep", num: 50 },
+        { title: "الحلقة 51", url: "https://www.youtube.com/embed/x4BptGhhPXA", type: "ep", num: 51 },
+        { title: "الحلقة 52 - روسان و سوران", url: "https://www.youtube.com/embed/pQ953CYo-kw", type: "ep", num: 52 },
+        { title: "الحلقة 53", url: "https://www.youtube.com/embed/Tn1LUcBNjX8", type: "ep", num: 53 },
+        { title: "الحلقة 54", url: "https://www.youtube.com/embed/b-qKQsbxeEk", type: "ep", num: 54 },
+        { title: "الحلقة 55", url: "https://www.youtube.com/embed/t5Wc27XPL1Q", type: "ep", num: 55 },
+        { title: "الحلقة 56", url: "https://www.youtube.com/embed/5ecc6xkvnVY", type: "ep", num: 56 },
+        { title: "الحلقة 57 - ذو الأرجل الطويلة", url: "https://www.youtube.com/embed/7y-P1YWX4xQ", type: "ep", num: 57 },
+        { title: "الحلقة 58", url: "https://www.youtube.com/embed/6SlWHmJKCJ4", type: "ep", num: 58 },
+        { title: "الحلقة 59", url: "https://www.youtube.com/embed/xPq8VJb_oJM", type: "ep", num: 59 },
+        { title: "الحلقة 60", url: "https://www.youtube.com/embed/vMs0oQn72p0", type: "ep", num: 60 },
+        { title: "الحلقة 61", url: "https://www.youtube.com/embed/t3rz_lb2JlU", type: "ep", num: 61 },
+        { title: "الحلقة 62", url: "https://www.youtube.com/embed/-O_g7pIvhSk", type: "ep", num: 62 },
+        { title: "الحلقة 63 - النجمتان", url: "https://www.youtube.com/embed/2BhlW67Nj7c", type: "ep", num: 63 },
+        { title: "الحلقة 64", url: "https://www.youtube.com/embed/pWGvszsks8Q", type: "ep", num: 64 },
+        { title: "الحلقة 65", url: "https://www.youtube.com/embed/4lZV0oj1J94", type: "ep", num: 65 },
+        { title: "الحلقة 66 - زعيم أسماك القرش", url: "https://www.youtube.com/embed/mlQxowo_F78", type: "ep", num: 66 },
+        { title: "الحلقة 67", url: "https://www.youtube.com/embed/T2JKbX7fHCE", type: "ep", num: 67 },
+        { title: "الحلقة 68", url: "https://www.youtube.com/embed/icz0chf4t2M", type: "ep", num: 68 },
+        { title: "الحلقة 69", url: "https://www.youtube.com/embed/g4WicZAvAI0", type: "ep", num: 69 },
+        { title: "الحلقة 70 - حصان طروادة", url: "https://www.youtube.com/embed/cvh2JBBn9Dg", type: "ep", num: 70 },
+        { title: "الحلقة 71 - قنينة الأشرار", url: "https://www.youtube.com/embed/HP7suSpYSro", type: "ep", num: 71 },
+        { title: "الحلقة 72 - ناركيسوس و ايكو", url: "https://www.youtube.com/embed/TByjOPtD3AY", type: "ep", num: 72 },
+        { title: "الحلقة 73", url: "https://www.youtube.com/embed/YiDjIjj8LPk", type: "ep", num: 73 },
+        { title: "الحلقة 74 - أليس في بلاد العجائب", url: "https://www.youtube.com/embed/kpWGv0vYhBQ", type: "ep", num: 74 },
+        { title: "الحلقة 75 - النملة والجندب", url: "https://www.youtube.com/embed/P8Os_VghwZE", type: "ep", num: 75 },
+        { title: "الحلقة 76", url: "https://www.youtube.com/embed/AaT4gloM_d4", type: "ep", num: 76 },
+        { title: "الحلقة 77", url: "https://www.youtube.com/embed/UFAnBQOp7CU", type: "ep", num: 77 },
+        { title: "الحلقة 78 - الأطباق الفضية", url: "https://www.youtube.com/embed/-7c2Bx4kB7U", type: "ep", num: 78 },
+        { title: "الحلقة 79", url: "https://www.youtube.com/embed/K2pLFuzPsls", type: "ep", num: 79 },
+        { title: "الحلقة 80", url: "https://www.youtube.com/embed/XWBEqYsq3tI", type: "ep", num: 80 },
+        { title: "الحلقة 81", url: "https://www.youtube.com/embed/ii_sj-dQ-XY", type: "ep", num: 81 },
+        { title: "الحلقة 82", url: "https://www.youtube.com/embed/6lbH8BIUlrU", type: "ep", num: 82 },
+        { title: "الحلقة 83 - الدمية والقمر", url: "https://www.youtube.com/embed/_JbKqocANsY", type: "ep", num: 83 },
+        { title: "الحلقة 84", url: "https://www.youtube.com/embed/sNyu7NTUD-I", type: "ep", num: 84 },
+        { title: "الحلقة 85", url: "https://www.youtube.com/embed/_Wm-dOIFg_A", type: "ep", num: 85 },
+        { title: "الحلقة 86", url: "https://www.youtube.com/embed/Ogt8KzBpORU", type: "ep", num: 86 },
+        { title: "الحلقة 87", url: "https://www.youtube.com/embed/TjC166lplVE", type: "ep", num: 87 },
+        { title: "الحلقة 88", url: "https://www.youtube.com/embed/iWNcVu4cic8", type: "ep", num: 88 },
+        { title: "الحلقة 89", url: "https://www.youtube.com/embed/cwsPg8X_Bk8", type: "ep", num: 89 },
+        { title: "الحلقة 90", url: "https://www.youtube.com/embed/kU3snTcIo6k", type: "ep", num: 90 },
+        { title: "الحلقة 91", url: "https://www.youtube.com/embed/QMU3WrcT0PA", type: "ep", num: 91 },
+        { title: "الحلقة 92", url: "https://www.youtube.com/embed/XtBT28ijkU8", type: "ep", num: 92 },
+        { title: "الحلقة 93", url: "https://www.youtube.com/embed/_se5Ruquzzw", type: "ep", num: 93 },
+        { title: "الحلقة 94 - زهور الكوسموس", url: "https://www.youtube.com/embed/Hpt4ca3_7q4", type: "ep", num: 94 },
+        { title: "الحلقة 95", url: "https://www.youtube.com/embed/24VvMsSftMg", type: "ep", num: 95 },
+        { title: "الحلقة 96", url: "https://www.youtube.com/embed/VUO0UKIIzuA", type: "ep", num: 96 },
+        { title: "الحلقة 97 - الخاتم العجيب", url: "https://www.youtube.com/embed/V-Acu77pGVo", type: "ep", num: 97 },
+        { title: "الحلقة 98", url: "https://www.youtube.com/embed/SRT9SUWbDT4", type: "ep", num: 98 },
+        { title: "الحلقة 99 - الأرنب المصاب بالزكام", url: "https://www.youtube.com/embed/oBZrpniRxw0", type: "ep", num: 99 },
+        { title: "الحلقة 100", url: "https://www.youtube.com/embed/i0jJXouACDM", type: "ep", num: 100 },
+        { title: "الحلقة 101", url: "https://www.youtube.com/embed/5DdWlurhvNY", type: "ep", num: 101 },
+        { title: "الحلقة 102", url: "https://www.youtube.com/embed/S9oPfeemGU0", type: "ep", num: 102 },
+        { title: "الحلقة 103", url: "https://www.youtube.com/embed/mUqHcxMnBZw", type: "ep", num: 103 },
+        { title: "الحلقة 104", url: "https://www.youtube.com/embed/BE5cC8w1p_U", type: "ep", num: 104 },
+        { title: "الحلقة 105 - القشة والفحمة وحبة الفول", url: "https://www.youtube.com/embed/W5ponRL4ltk", type: "ep", num: 105 },
+        { title: "الحلقة 106 - الأمير والفقير", url: "https://www.youtube.com/embed/wAU6ut353EU", type: "ep", num: 106 },
+        { title: "الحلقة 107 - شانغهاي والضفدع", url: "https://www.youtube.com/embed/Eo3nlXLec-c", type: "ep", num: 107 },
+        { title: "الحلقة 108 - القرد المغرور", url: "https://www.youtube.com/embed/VFh3gKwrGrY", type: "ep", num: 108 },
+        { title: "الحلقة 109 - البطة الصغيرة الغريبة", url: "https://www.youtube.com/embed/SPSrob9fJnI", type: "ep", num: 109 },
+        { title: "شارة البداية", url: "https://www.youtube.com/embed/mzJfH94Nk9E", type: "intro", num: null }
     ];
 
     const grid = document.getElementById('buttonsGrid'); 
     const player = document.getElementById('videoPlayer'); 
     const iframe = document.getElementById('mainIframe'); 
     const titleDisp = document.getElementById('episodeTitle');
+    
     let scrollPosition = 0;
-    
-    function lockPage() { 
-        scrollPosition = window.scrollY; 
-        document.body.style.position = 'fixed'; 
-        document.body.style.top = `-${scrollPosition}px`; 
-        document.body.style.width = '100%'; 
-    }
-    
-    function unlockPage() { 
-        document.body.style.position = ''; 
-        document.body.style.top = ''; 
-        document.body.style.width = ''; 
-        window.scrollTo(0, scrollPosition); 
-    }
-    
-    for(let i = 0; i < episodeLinks.length; i++) { 
+    function lockPage() { scrollPosition = window.scrollY; document.body.style.position = 'fixed'; document.body.style.top = `-${scrollPosition}px`; document.body.style.width = '100%'; }
+    function unlockPage() { document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; window.scrollTo(0, scrollPosition); }
+
+    episodesData.forEach((item) => { 
         const btn = document.createElement('button'); 
         btn.className = 'ep-btn'; 
-        btn.innerText = i + 1; 
-        const link = episodeLinks[i];
-        const idx = i;
+        
+        if (item.type === "intro") {
+            btn.classList.add('intro-btn');
+            btn.innerText = "شارة البداية";
+        } else {
+            btn.innerText = item.num; 
+        }
+        
         btn.onclick = function() { 
-            window.open(adLink, '_blank'); 
+            window.open(popupAdLink, '_blank');
+            
             lockPage(); 
             player.style.display = 'block'; 
-            iframe.src = link; 
-            titleDisp.innerText = "أنت تشاهد الآن: سيف النار - الحلقة " + (idx + 1); 
+            iframe.src = item.url; 
+            
+            if (item.type === "intro") {
+                titleDisp.innerText = "أنت تشاهد الآن: حكايات عالمية - شارة البداية";
+            } else {
+                titleDisp.innerText = "أنت تشاهد الآن: حكايات عالمية - الحلقة " + item.num; 
+            }
+            
             document.querySelectorAll('.ep-btn').forEach(b => b.classList.remove('active')); 
-            this.classList.add('active'); 
+            btn.classList.add('active'); 
+            
             setTimeout(() => { unlockPage(); }, 500); 
         }; 
         grid.appendChild(btn); 
-    }
+    });
 </script>
 </body>
 </html>
