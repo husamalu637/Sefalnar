@@ -56,7 +56,7 @@
 
     <div class="video-wrapper-outer">
         <div id="videoPlayer" class="video-display-area">
-            <div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen allow="autoplay; encrypted-media" scrolling="no"></iframe></div>
+            <div class="responsive-iframe"><iframe id="mainIframe" src="" allowfullscreen allow="autoplay; encrypted-media" scrolling="no" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe></div>
             <div id="episodeTitle" style="padding: 10px; background: var(--card); font-weight: bold;"></div>
         </div>
     </div>
@@ -77,7 +77,7 @@
 <script>
     const popupAdLink = "https://www.profitablecpmratenetwork.com/e41dj2h87?key=bef514b5ca3fa945e7a3b60e4a9ef21a";
 
-    // مصفوفة الحلقات تبدأ من الحلقة 1 (علاء الدين) وتنتهي بشارة البداية في الأخير
+    // مصفوفة الحلقات (من 1 إلى 109 مع شارة البداية في النهاية)
     const episodesData = [
         { title: "الحلقة 1 - علاء الدين والمصباح السحري", url: "https://www.youtube.com/embed/Esv--UvlI1I", type: "ep", num: 1 },
         { title: "الحلقة 2 - الراعي البسيط", url: "https://www.youtube.com/embed/_V6hoHmnFhs", type: "ep", num: 2 },
